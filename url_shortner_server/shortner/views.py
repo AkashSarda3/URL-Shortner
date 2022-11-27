@@ -33,7 +33,7 @@ def signup(request):
 
         myuser.save()
         messages.success(request, "Your Account has been successfully created.")
-        return redirect("signin")
+        return redirect("home")
     return render(request, "authentication/signup.html")
 
 def signin(request):
@@ -51,7 +51,7 @@ def signin(request):
         else:
             messages.error(request,"Bad Credentials!")
             return redirect("home")
-    return render(request, "authentication/signin.html")
+    return render(request, "authentication/index.html")
 
 def signout(request):
     logout(request)
