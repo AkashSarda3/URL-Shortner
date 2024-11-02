@@ -13,10 +13,10 @@ class CustomView(View):
 
     def post(self, request: HttpRequest):
         """post handles post requests to /custom"""
-        httpBody = json.loads(request.body)
-        long_url = httpBody["long_url"]
+        http_body = json.loads(request.body)
+        long_url = http_body["long_url"]
         link = Link(long_url)
-        custom_url = httpBody["custom_url"]
+        custom_url = http_body["custom_url"]
         link.save_custom(custom_url)
         response = link.to_json()
         return HttpResponse(response, status=201)

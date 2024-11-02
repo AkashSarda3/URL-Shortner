@@ -12,4 +12,5 @@ def login_test(request: HttpRequest):
 
 
 def signup_test(request: HttpRequest):
+    """test the signup"""
     return render(request, 'test.html', {})

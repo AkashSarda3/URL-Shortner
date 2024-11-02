@@ -15,7 +15,7 @@ class DeleteView(View):
         """delete handles requests to be deleted /delete"""
         special_codes = special_code
         try:
-            member = Link.objects.get(special_code=special_codes)
+            member = Link.objects.get(special_code=special_codes) # pylint: disable=no-member
             member.delete()
             return redirect("list")
         except Exception as e:

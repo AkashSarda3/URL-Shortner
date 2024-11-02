@@ -5,84 +5,255 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-
+  <!-- Preconnect for Fonts and Stylesheets -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'style.css' %}">
   <link rel="stylesheet" href="{% static 'homemain.css' %}">
   <link rel="stylesheet" href="{% static 'colors.css' %}">
-
 </head>
+
+<style>
+    button[type = button] {
+  background: var(--color-primary);
+  border: 0;
+  padding: 10px 30px;
+  color: #fff;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+button[type = button]:hover {
+  background: rgba(var(--color-primary-rgb), 0.8);
+}
+ /* Global Styles */
+
+ body, html {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: #444; /* Default text color */
+      background-color: #fafafa; /* Light background color for overall page */
+      padding-bottom: 0px;
+      
+    }
+    main {
+      flex: 1;
+    }
+
+    /* Header and Navbar Styling */
+    .header {
+      background: #ffffff; /* Light background for the navbar */
+      padding: 1.5rem 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease; /* Smooth transition */
+    }
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      color: #333; /* Dark text for better contrast */
+      margin: 0;
+      font-size: 2em; /* Increased size for emphasis */
+    }
+    .navbar {
+      display: flex; /* Use flexbox */
+      align-items: center; /* Center align items vertically */
+      justify-content: space-between; /* Space between items */
+      width: 100%;
+    }
+    .nav-links {
+        flex: 1; /* Allow this to grow and fill space */
+        display: flex; /* Use flexbox for centering */
+        justify-content: center; /* Center items in the nav */
+    }
+    .nav-links ul {
+        list-style: none; /* Remove bullet points */
+        display: flex; /* Use flexbox for horizontal alignment */
+        gap: 3em; /* Spacing between links */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 3em; /* More spacing for better visibility */
+      margin: 0;
+      padding: 0;
+    }
+    .navbar li a {
+      color: #555; /* Darker for good contrast */
+      font-weight: 500;
+      text-decoration: none;
+      padding: 0.5rem 0; /* Added vertical padding */
+      transition: color 0.3s;
+    }
+    .navbar li a:hover {
+      color: #ff6347; /* Change to a vibrant color on hover */
+      text-decoration: underline; /* Underline effect on hover */
+    }
+    .sign-out-container {
+    margin-left: auto; /* Push the Sign Out button to the right */
+}
+
+.sign-out-container a {
+    color: #333; /* Set color for the link */
+    font-weight: 600; /* Make the font bold */
+    text-decoration: none; /* Remove underline */
+    padding: 0.5rem 1rem; /* Add some padding */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.sign-out-container a:hover {
+    color: #ff6347; /* Change color on hover */
+}
+    .header a {
+      color: #333; /* Dark text color for links */
+      font-weight: 600;
+      margin-left: 2em; /* Spacing for clarity */
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .header a:hover {
+      color: #ff6347; /* Highlight on hover */
+    }
+
+    /* Footer Styling */
+    .footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: auto; /* Push footer to bottom */
+    }
+    .footer span {
+      color: #e25555;
+    }
+
+    /* Scroll to Top Button */
+    .scroll-top {
+      position: fixed;
+      bottom: 2em;
+      right: 2em;
+      background: #ff6347; /* Color of scroll button */
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease;
+      z-index: 1000; /* Ensure button is above other elements */
+    }
+    .scroll-top:hover {
+      background: rgba(255, 99, 71, 0.9);
+      transform: translateY(-2px); /* Lift effect on hover */
+    }
+
+</style>
+
 <body>
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-      <h1> Welcome,  {{userFname}}</h1>
+      <!-- <h1> Welcome, {{userFname}}</h1> -->
+      <h1>Txtly</h1>
       <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/list">Manage Your Urls</a></li>
-          <li><a href="/stats">Statistics</a></li>
-        </ul>
-      </nav>
-
-      <div class="position-relative">
-        <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-        <div class="search-form-wrap js-search-form-wrap">
-          <form action="search-result.html" class="search-form">
-            <span class="icon bi-search"></span>
-            <input type="text" placeholder="Search" class="form-control">
-            <button class="btn js-search-close"><span class="bi-x"></span></button>
-          </form>
+        <div class="nav-links">
+            <ul>
+                <li><a href="{% url 'about_us' %}">Home</a></li>
+                <li><a href="{% url 'list' %}">Manage Your Urls</a></li>
+                <li><a href="{% url 'stats' %}">Statistics</a></li>
+            </ul>
         </div>
-      </div>
-      <a href="/signout">Sign Out</a>
+        <div class="sign-out-container">
+            <a href="/signout">Sign Out</a>
+        </div>
+    </nav>  
+      
     </div>
   </header>
+
+
   <main id="main">
     <section id="contact" class="contact mb-5">
       <div class="container" data-aos="fade-up">
         <div class="form mt-5">
-          <form method="post" role="form" class="php-email-form" action="/new">
+          <form method="post" role="form" class="php-email-form" action="/new" enctype="multipart/form-data">
             <div class="form-group">
               <input type="text" class="form-control" name="long-url" id="long-url" placeholder="Long-Url" required>
             </div>
 
             <div class="custom-field">
               <div class="radio">
-                  <span class="label">Do you want to provide custom url stub? (STUB_LENGTH is 10)</span>
-                  <div id="field_8"><label><input type="radio" name="field_8" id="option_9" value="Yes" onclick="document.getElementById('divUrl').style.display='block'"> Yes</label><label><input type="radio" name="field_8" id="option_10" value="No" onclick="document.getElementById('divUrl').style.display='none'"> No</label></div>
+                <span class="label">Do you want to provide custom url stub? (STUB_LENGTH is 10)</span>
+                <div id="field_8">
+                  <label><input type="radio" name="field_8" id="option_9" value="Yes"
+                      onclick="document.getElementById('divUrl').style.display='block'"> Yes</label>
+                  <label><input type="radio" name="field_8" id="option_10" value="No"
+                      onclick="document.getElementById('divUrl').style.display='none'"> No</label>
+                </div>
               </div>
+            </div>
+
+            <div class="custom-field" id="divUrl" style="display:none">
+              <input type="text" class="form-control" name="custom-stub" id="custom-stub" placeholder="Custom-stub" />
+            </div>
+
+            <form action="{% url 'add_new' %}" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              <!-- Upload Button and File Input -->
+              <div class="text-center">
+                <button type="submit">Generate</button>
+                <button type="button" onclick="toggleFileUpload()">Upload CSV</button>
+                <input type="file" name="file" id="file-upload" accept=".csv" style="display:none;"
+                  onchange="removeTextarea()">
               </div>
-              
-              <div class="custom-field" id="divUrl" style="display:none">
-                <input type="text" class="form-control" name="custom-stub" id="custom-stub" placeholder="Custom-stub" />
-              </div>
-              
-            <div class="text-center"><button type="submit">Generate</button></div>
+            </form>
           </form>
         </div>
       </div>
     </section>
   </main>
 
-  <footer id="footer" class="site-footer footer">
-    <div class="site-footer footer-content">
-      <div class="container">
-        <div class="row g-5">
-          <div class="col-lg-4">
-            <p>Made with <span style="color: #e25555;">&hearts;</span> by Team 5 and Team 16</p>
-          </div>
-        </div>
-      </div>
+  <footer id="footer" class="footer">
+    <div class="container">
+      <p>Made with <span>&hearts;</span> by Team 21, 5 and 16</p>
     </div>
   </footer>
 
-  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="fa fa-arrow-up"></i></a>
 
+  <!-- JavaScript to handle file upload display -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function toggleFileUpload() {
+            const fileUpload = document.getElementById('file-upload');
+            const longUrlField = document.getElementById('long-url');
+
+            if (fileUpload.style.display === 'none') {
+                fileUpload.style.display = 'block';
+                longUrlField.removeAttribute('required');
+            } else {
+                fileUpload.style.display = 'none';
+                longUrlField.setAttribute('required', '');
+            }
+        }
+
+        window.toggleFileUpload = toggleFileUpload; // Attach function to the window object
+    });
+
+    function removeTextarea() {
+      document.getElementById('long-url').style.display = 'none';
+    }
+  </script>
 </body>
 
 </html>
